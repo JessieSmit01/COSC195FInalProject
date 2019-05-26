@@ -6,13 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:text="Add a New Workout Session"
+        app:layout_constraintEnd_toEndOf="@+id/btnView"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="@+id/btnView"
+        tools:layout_editor_absoluteY="410dp" />
+
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="View Saved Workout Sessions"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
+        app:layout_constraintVertical_bias="0.255" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="357dp"
+        android:layout_height="105dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/press_start_2p"
+        android:text="Workout Tracker"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="466dp"
+        android:layout_height="202dp"
+        android:layout_marginBottom="88dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        app:layout_constraintEnd_toEndOf="@+id/btnAdd"
+        app:layout_constraintStart_toStartOf="@+id/btnAdd"
+        app:srcCompat="@drawable/dumbell" />
 
 </android.support.constraint.ConstraintLayout>
