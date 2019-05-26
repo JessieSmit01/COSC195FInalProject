@@ -1,97 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-            android:id="@+id/scroll"
-            android:layout_width="49dp"
-            android:layout_height="62dp">
+                android:id="@+id/scroll"
+                android:layout_width="49dp"
+                android:layout_height="62dp">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="44dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/press_start_2p"
-                android:text="Add a New Workout"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="44dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:text="Add a New Workout"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.494"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/txtName"
-                android:layout_width="wrap_content"
-                android:layout_height="21dp"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/press_start_2p"
-                android:text="Name:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="28dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:text="Name:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="223dp"
-                android:layout_height="44dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:ems="10"
-                android:hint="Give your workout a name"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toBottomOf="@+id/txtName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txtName"
-                app:layout_constraintTop_toTopOf="@+id/txtName" />
+                <EditText
+                    android:id="@+id/etName"
+                    android:layout_width="223dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:ems="10"
+                    android:hint="Give your workout a name"
+                    android:inputType="textPersonName"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/txtName"
+                    app:layout_constraintTop_toTopOf="@+id/txtName" />
 
-            <CalendarView
-                android:id="@+id/date"
-                android:layout_width="324dp"
-                android:layout_height="301dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/editText2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/txtName"
-                app:layout_constraintTop_toBottomOf="@+id/editText2" />
+                <CalendarView
+                    android:id="@+id/date"
+                    android:layout_width="324dp"
+                    android:layout_height="301dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/etName"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/txtName"
+                    app:layout_constraintTop_toBottomOf="@+id/etName" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/press_start_2p"
-                android:text="Description:"
-                app:layout_constraintEnd_toEndOf="@+id/date"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/date"
-                app:layout_constraintTop_toBottomOf="@+id/date" />
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:text="Description:"
+                    app:layout_constraintEnd_toEndOf="@+id/date"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/date"
+                    app:layout_constraintTop_toBottomOf="@+id/date" />
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="322dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Please input a description of your workout here.\nYou can also type each exercise performed"
-                android:inputType="textMultiLine"
-                app:layout_constraintEnd_toEndOf="@+id/date"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/date"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="322dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Please input a description of your workout here.\nExample:\nBench Press\nBarbell Squat\nChin-ups"
+                    android:inputType="textMultiLine"
+                    app:layout_constraintEnd_toEndOf="@+id/date"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/date"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <ImageView
+                    android:id="@+id/imgView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="@+id/description"
+                    app:layout_constraintHorizontal_bias="0.49"
+                    app:layout_constraintStart_toStartOf="@+id/description"
+                    app:layout_constraintTop_toBottomOf="@+id/description"
+                    app:srcCompat="@android:color/background_light" />
+
+                <Button
+                    android:id="@+id/btnAddPicture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:onClick="onClick"
+                    android:text="Add Picture"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/description"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/description"
+                    app:layout_constraintTop_toBottomOf="@+id/imgView" />
+
+                <Button
+                    android:id="@+id/btnSaveWorkout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="56dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:text="Save"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnAddPicture"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.292"
+                    app:layout_constraintStart_toEndOf="@+id/btnAddPicture"
+                    app:layout_constraintTop_toTopOf="@+id/btnAddPicture"
+                    app:layout_constraintVertical_bias="0.0" />
 
 
-    </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
 </ScrollView>
