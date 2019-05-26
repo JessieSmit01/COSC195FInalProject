@@ -10,51 +10,50 @@
         android:id="@+id/btnAdd"
         android:layout_width="300dp"
         android:layout_height="80dp"
+        android:layout_marginBottom="84dp"
+        android:fontFamily="@font/press_start_2p"
+        android:onClick="onClick"
         android:text="Add a New Workout Session"
-        app:layout_constraintEnd_toEndOf="@+id/btnView"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="@+id/btnView"
-        tools:layout_editor_absoluteY="410dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btnView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="@+id/imageView" />
 
     <Button
         android:id="@+id/btnView"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="52dp"
         android:text="View Saved Workout Sessions"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
-        app:layout_constraintVertical_bias="0.255" />
+        app:layout_constraintEnd_toEndOf="@+id/btnAdd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnAdd" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="357dp"
-        android:layout_height="105dp"
+        android:layout_width="329dp"
+        android:layout_height="103dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/press_start_2p"
         android:text="Workout Tracker"
-        android:textSize="50sp"
+        android:textSize="45sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="466dp"
-        android:layout_height="202dp"
-        android:layout_marginBottom="88dp"
+        android:layout_width="351dp"
+        android:layout_height="185dp"
+        android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toTopOf="@+id/btnAdd"
-        app:layout_constraintEnd_toEndOf="@+id/btnAdd"
-        app:layout_constraintStart_toStartOf="@+id/btnAdd"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
         app:srcCompat="@drawable/dumbell" />
 
 </android.support.constraint.ConstraintLayout>
