@@ -8,10 +8,13 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,6 +22,8 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
 
     public ImageView imgView;
     public Uri file;
+    private final String dir =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+ "/Folder/";
+    File newdir = new File(dir);
 
 
     @Override
@@ -26,8 +31,7 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_workout);
         imgView = findViewById(R.id.imgView);
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
+        newdir.mkdirs();
 
 
     }
@@ -38,39 +42,11 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
         switch(v.getId())
         {
             case R.id.btnAddPicture:
-               takePicture(v);
+                openCamera();
 
                 return;
         }
     }
-
-    private static File getOutputMediaFile(){
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "CameraDemo");
-
-        if (!mediaStorageDir.exists()){
-            if (!mediaStorageDir.mkdirs()){
-                return null;
-            }
-        }
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        return new File("file://" +mediaStorageDir.getPath() + File.separator +
-                "IMG_"+ timeStamp + ".jpg");
-    }
-
-
-
-    public void takePicture(View view) {
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        file = Uri.fromFile(getOutputMediaFile());
-        //intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
-
-        intent.setDataAndType(file, "jpg");
-
-        startActivityForResult(intent, 100);
-    }
-
 
 
 
@@ -78,12 +54,18 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        this.imgView.setImageURI(data.getData());
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+
+            imgView.setImageURI(data.getData());
+        }
     }
+
 
     private void openCamera() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivity(intent);
+        startActivityForResult(intent, 100);
     }
 
 }
