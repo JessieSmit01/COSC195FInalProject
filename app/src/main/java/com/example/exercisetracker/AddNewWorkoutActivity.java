@@ -35,9 +35,10 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
     double longitude;
     private String address;
     public ImageView imgView;
-    public Uri file;
     private final String dir =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+ "/Folder/";
     File newdir = new File(dir);
+
+
 
     LocationManager locationManager;
 
@@ -62,17 +63,9 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private static final int REQUEST_CAPTURE_IMAGE = 100; //represent the request code for img capture
 
-    private void openCameraIntent() {
-        Intent pictureIntent = new Intent(
-                MediaStore.ACTION_IMAGE_CAPTURE
-        );
-        if(pictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(pictureIntent,
-                    REQUEST_CAPTURE_IMAGE);
-        }
-    }
+
+
 
 
     @Override
