@@ -25,6 +25,7 @@
         android:layout_height="80dp"
         android:layout_marginBottom="64dp"
         android:fontFamily="@font/press_start_2p"
+        android:onClick="onClick"
         android:text="View Saved Workout Sessions"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnAdd"

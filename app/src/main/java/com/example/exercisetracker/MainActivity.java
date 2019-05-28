@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.btnView:
-
+                Intent i = new Intent(this, ViewWorkouts.class);
+                startActivity(i);
                 break;
         }
     }

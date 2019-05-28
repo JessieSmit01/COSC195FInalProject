@@ -4,31 +4,28 @@ import android.graphics.Bitmap;
 
 public class WorkoutSession {
     public String name;
-    public long date;
+    public String date;
     public String description;
-    public int id;
+    public long id;
     public Bitmap picture;
-    public double longitude;
-    public double latitude;
+    public String address;
 
-    public WorkoutSession(String name, long date, String description, Bitmap picture, double latitude, double longitude) {
+    public WorkoutSession(String name, String date, String description, Bitmap picture, String address) {
         this.id = -1;
         this.name = name;
         this.date = date;
         this.description = description;
         this.picture = picture;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.address = address;
     }
 
-    public WorkoutSession( int id,String name, long date, String description, Bitmap picture, double latitude, double longitude) {
+    public WorkoutSession( long id,String name, String date, String description, Bitmap picture, String address) {
         this.name = name;
         this.date = date;
         this.description = description;
         this.id = id;
         this.picture = picture;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.address = address;
     }
 }
 

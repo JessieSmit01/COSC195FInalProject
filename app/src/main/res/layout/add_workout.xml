@@ -56,7 +56,7 @@
                     app:layout_constraintTop_toTopOf="@+id/txtName" />
 
                 <CalendarView
-                    android:id="@+id/date"
+                    android:id="@+id/txtDate"
                     android:layout_width="324dp"
                     android:layout_height="301dp"
                     android:layout_marginTop="16dp"
@@ -73,10 +73,10 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/press_start_2p"
                     android:text="Description:"
-                    app:layout_constraintEnd_toEndOf="@+id/date"
+                    app:layout_constraintEnd_toEndOf="@+id/txtDate"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/date"
-                    app:layout_constraintTop_toBottomOf="@+id/date" />
+                    app:layout_constraintStart_toStartOf="@+id/txtDate"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDate" />
 
                 <EditText
                     android:id="@+id/description"
@@ -87,9 +87,9 @@
                     android:gravity="start|top"
                     android:hint="Please input a description of your workout here.\nExample:\nBench Press\nBarbell Squat\nChin-ups"
                     android:inputType="textMultiLine"
-                    app:layout_constraintEnd_toEndOf="@+id/date"
+                    app:layout_constraintEnd_toEndOf="@+id/txtDate"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/date"
+                    app:layout_constraintStart_toStartOf="@+id/txtDate"
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
                 <ImageView

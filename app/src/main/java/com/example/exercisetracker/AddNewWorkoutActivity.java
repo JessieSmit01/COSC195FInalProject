@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -20,6 +21,8 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -34,9 +37,13 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
     double latitude;
     double longitude;
     private String address;
+    private EditText name;
+    private CalendarView date;
     public ImageView imgView;
+    public EditText description;
     private final String dir =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+ "/Folder/";
     File newdir = new File(dir);
+    WorkoutDPHelper db;
 
 
 
@@ -52,6 +59,11 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
         newdir.mkdirs();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        this.name = findViewById(R.id.etName);
+        this.date = findViewById(R.id.txtDate);
+        this.description = findViewById(R.id.description);
+
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED)
         {
@@ -59,6 +71,8 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER, 5000, 5, this);
         }
+
+        db = new WorkoutDPHelper(this);
 
 
     }
@@ -86,6 +100,8 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
             case R.id.btnSaveWorkout:
                 this.address = getAddress(this, latitude, longitude);
                 Toast.makeText(this, address, Toast.LENGTH_LONG).show();
+                saveToDB();
+
                 return;
         }
     }
@@ -146,7 +162,7 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            Bitmap bitmap = BitmapFactory. decodeFile(this.currentPhotoPath);
+            Bitmap bitmap = BitmapFactory.decodeFile(this.currentPhotoPath);
             imgView.setImageBitmap(bitmap);
         }
     }
@@ -199,6 +215,22 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "";
+        return "Location Unavailable";
+    }
+
+    public void saveToDB()
+    {
+        WorkoutSession session = new WorkoutSession(this.name.getText().toString(), formatDate(), this.description.getText().toString(),
+                ((BitmapDrawable)this.imgView.getDrawable()).getBitmap(), getAddress(this, latitude, longitude));
+        db.open();
+        db.createWorkoutSession(session);
+
+
+        Toast.makeText(this, "Workout saved", Toast.LENGTH_SHORT).show();
+    }
+
+    public String formatDate()
+    {
+        return DateFormat.format("yyyy-MM-dd", this.date.getDate()).toString();
     }
 }
