@@ -7,10 +7,10 @@ public class WorkoutSession {
     public String date;
     public String description;
     public long id;
-    public Bitmap picture;
+    public String picture;
     public String address;
 
-    public WorkoutSession(String name, String date, String description, Bitmap picture, String address) {
+    public WorkoutSession(String name, String date, String description, String picture, String address) {
         this.id = -1;
         this.name = name;
         this.date = date;
@@ -19,7 +19,7 @@ public class WorkoutSession {
         this.address = address;
     }
 
-    public WorkoutSession( long id,String name, String date, String description, Bitmap picture, String address) {
+    public WorkoutSession( long id,String name, String date, String description, String picture, String address) {
         this.name = name;
         this.date = date;
         this.description = description;

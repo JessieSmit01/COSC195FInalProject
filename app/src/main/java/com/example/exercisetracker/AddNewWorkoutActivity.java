@@ -32,6 +32,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.MonthDay;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -47,6 +49,9 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
     private final String dir =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+ "/Folder/";
     File newdir = new File(dir);
     WorkoutDPHelper db;
+
+    public String stringDate;
+
 
     public static final File PICTURES_PATH = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + File.separator + "ExerciseTracker");
 
@@ -64,10 +69,21 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
         newdir.mkdirs();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+
+
         this.name = findViewById(R.id.etName);
         this.date = findViewById(R.id.txtDate);
         this.description = findViewById(R.id.description);
 
+        date.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+
+                stringDate =String.valueOf(MonthDay.of(month + 1, dayOfMonth).toString().substring(2) + "-" + year);
+            }
+        });
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED)
@@ -241,8 +257,7 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
 
     public void saveToDB()
     {
-        WorkoutSession session = new WorkoutSession(this.name.getText().toString(), formatDate(), this.description.getText().toString(),
-                ((BitmapDrawable)this.imgView.getDrawable()).getBitmap(), getAddress(this, latitude, longitude));
+        WorkoutSession session = new WorkoutSession(this.name.getText().toString(), this.stringDate, this.description.getText().toString(), this.currentPhotoPath, getAddress(this, latitude, longitude));
         db.open();
         db.createWorkoutSession(session);
 

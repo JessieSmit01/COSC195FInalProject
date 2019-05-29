@@ -5,14 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ViewWorkouts extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+public class ViewWorkouts extends AppCompatActivity implements AdapterView.OnItemClickListener  {
 
     ListView lv;
     ArrayList<WorkoutSession> sessionList;
@@ -27,9 +25,15 @@ public class ViewWorkouts extends AppCompatActivity implements AdapterView.OnIte
 
         getWorkouts();
         adapter = new WorkoutAdapter(this, sessionList);
-        lv = findViewById(R.id.ListView);
+
+        lv = findViewById(R.id.list123);
+        lv.setOnItemClickListener(this);
+
         lv.setAdapter(adapter);
-        lv.setOnItemSelectedListener(this);
+
+
+
+
     }
 
     public void getWorkouts()
@@ -37,21 +41,22 @@ public class ViewWorkouts extends AppCompatActivity implements AdapterView.OnIte
         db.open();
         Cursor cursor =db.getAllWorkouts();
         cursor.moveToFirst();
-        for(int j = 0; j < cursor.getCount(); j++)
+        WorkoutSession obSession = new WorkoutSession(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+        sessionList.add(obSession);
+        while(cursor.moveToNext())
         {
-            WorkoutSession obSession = new WorkoutSession(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), db.getImage(cursor.getBlob(4)), cursor.getString(5));
+            obSession = new WorkoutSession(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
             sessionList.add(obSession);
         }
     }
 
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-    }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        int s = 1 + 1;
 
     }
 }

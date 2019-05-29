@@ -38,11 +38,11 @@ public class WorkoutDPHelper extends SQLiteOpenHelper {
         String sCreate = "CREATE TABLE " +
                 TABLE_NAME + "(" +
                 ID + " integer primary key autoincrement, " +
-                NAME + " text not null, " +
-                DATE + " text not null, " +
-                DESCRIP + " text not null, " +
-                LOCATION + " text not null, " +
-                PICTURE + " BLOB);";
+                NAME + " text, " +
+                DATE + " text, " +
+                DESCRIP + " text, " +
+                LOCATION + " text, " +
+                PICTURE + " text);";
         db.execSQL(sCreate);
 
     }
@@ -86,7 +86,8 @@ public class WorkoutDPHelper extends SQLiteOpenHelper {
         cvs.put(NAME, session.name);
         cvs.put(DATE, session.date);
         cvs.put(DESCRIP, session.description);
-        cvs.put(PICTURE, getBytes(session.picture));
+        cvs.put(PICTURE, session.picture);
+        cvs.put(LOCATION, session.address);
         cvs.put(LOCATION, session.address);
 
 

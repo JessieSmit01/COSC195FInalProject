@@ -7,15 +7,33 @@
     tools:context=".ViewWorkouts">
 
     <ListView
-        android:id="@+id/ListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/list123"
+        android:layout_width="385dp"
+        android:layout_height="590dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:clickable="true"
+        android:focusable="auto"
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toTopOf="@+id/btnDelete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="392dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/press_start_2p"
+        android:text="Delete Selected Workout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
