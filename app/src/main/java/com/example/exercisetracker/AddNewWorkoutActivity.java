@@ -20,13 +20,16 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -163,7 +166,13 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bitmap bitmap = BitmapFactory.decodeFile(this.currentPhotoPath);
-            imgView.setImageBitmap(bitmap);
+            File obFile = savebitmap(bitmap);
+
+            imgView.setImageURI(Uri.fromFile(obFile));
+
+            Toast.makeText(this, obFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+
+
         }
     }
 
@@ -232,5 +241,25 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
     public String formatDate()
     {
         return DateFormat.format("yyyy-MM-dd", this.date.getDate()).toString();
+    }
+
+
+    public static File savebitmap(Bitmap bmp)  {
+        try {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 60, bytes);
+            File f = new File(Environment.getExternalStorageDirectory()
+                    + File.separator + "testimage.jpg");
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+            fo.close();
+            return f;
+        }
+        catch(IOException e)
+        {
+
+        }
+        return null;
     }
 }

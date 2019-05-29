@@ -111,9 +111,9 @@ public class WorkoutDPHelper extends SQLiteOpenHelper {
 
 
     public static byte[] getBytes(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
-        return stream.toByteArray();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+       return bos.toByteArray();
     }
 
     // convert from byte array to bitmap
