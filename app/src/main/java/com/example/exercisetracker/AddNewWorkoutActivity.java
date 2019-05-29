@@ -48,6 +48,8 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
     File newdir = new File(dir);
     WorkoutDPHelper db;
 
+    public static final File PICTURES_PATH = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + File.separator + "ExerciseTracker");
+
 
 
     LocationManager locationManager;
@@ -133,6 +135,8 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
 
     String currentPhotoPath; //Temporary photo path for current photo taken
 
+    File newFile;
+
     /**
      * returns a temporary file that is used to hold a picture.
      * @return
@@ -141,17 +145,25 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
         try {
             // Create an image file name. Make it unique by setting it a current timestamp
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = "JPEG_" + timeStamp + "_";
-            File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-            File image = File.createTempFile(
-                    imageFileName,  /* prefix */
-                    ".jpg",         /* suffix */
-                    storageDir      /* directory */
-            );
+            String imageFileName = "JPEG_" + timeStamp + "_" + ".jpg";
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+//            File image = File.createTempFile(
+//                    imageFileName,  /* prefix */
+//                    ".jpg",         /* suffix */
+//                    storageDir      /* directory */
+//            );
+
+            File obFile = new File(path + File.separator, "ExerciseTracker");
+            if(!obFile.exists()) {
+                obFile.mkdir();
+            }
+
+            File file = new File(obFile,  imageFileName);
 
             // Save a file: path for use with ACTION_VIEW intents
-            currentPhotoPath = image.getAbsolutePath();
-            return image;
+            currentPhotoPath = file.getAbsolutePath();
+            newFile = file;
+            return file;
         }
         catch( Exception e)
         {
@@ -166,7 +178,7 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bitmap bitmap = BitmapFactory.decodeFile(this.currentPhotoPath);
-            File obFile = savebitmap(bitmap);
+            File obFile = newFile;
 
             imgView.setImageURI(Uri.fromFile(obFile));
 
@@ -244,22 +256,22 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
     }
 
 
-    public static File savebitmap(Bitmap bmp)  {
-        try {
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.JPEG, 60, bytes);
-            File f = new File(Environment.getExternalStorageDirectory()
-                    + File.separator + "testimage.jpg");
-            f.createNewFile();
-            FileOutputStream fo = new FileOutputStream(f);
-            fo.write(bytes.toByteArray());
-            fo.close();
-            return f;
-        }
-        catch(IOException e)
-        {
-
-        }
-        return null;
-    }
+//    public static File savebitmap(Bitmap bmp)  {
+//        try {
+//            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//            bmp.compress(Bitmap.CompressFormat.JPEG, 60, bytes);
+//            File f = new File(Environment.getExternalStorageDirectory()
+//                    + File.separator + DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString()+".jpg");
+//            f.createNewFile();
+//            FileOutputStream fo = new FileOutputStream(f);
+//            fo.write(bytes.toByteArray());
+//            fo.close();
+//            return f;
+//        }
+//        catch(IOException e)
+//        {
+//
+//        }
+//        return null;
+//    }
 }
