@@ -11,20 +11,29 @@ import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 
+/**
+ * This class will be a helper class and provide communication between activities
+ * and the database
+ */
 public class WorkoutDPHelper extends SQLiteOpenHelper {
-    public static final String DB_NAME = "workouts.db";
-    public static final int DB_VERSION = 1;
-    public static final String TABLE_NAME = "workouts";
-    public static final String ID = "_id";
-    public static final String NAME = "name";
-    public static final String DATE = "date";
-    public static final String DESCRIP = "description";
-    public static final String LOCATION = "Address";
-    public static final String PICTURE = "picture";
+    //Table variables
+    public static final String DB_NAME = "workouts.db"; //database name
+    public static final int DB_VERSION = 1; //database version
+    public static final String TABLE_NAME = "workouts"; //table name
+    public static final String ID = "_id"; //column 1
+    public static final String NAME = "name"; //column2
+    public static final String DATE = "date"; //column 3
+    public static final String DESCRIP = "description";//column 4
+    public static final String LOCATION = "Address";//column 5
+    public static final String PICTURE = "picture";//column6
 
-    public SQLiteDatabase sqlDB;
+    public SQLiteDatabase sqlDB; //reference to SQLite database
 
 
+    /**
+     * WorkoutDBHelper constructor
+     * @param context
+     */
     public WorkoutDPHelper(Context context)
     {
         // context is required ot know where to create the db file
@@ -32,9 +41,13 @@ public class WorkoutDPHelper extends SQLiteOpenHelper {
 
     }
 
-
+    /**
+     * This checks for a change in the db version. If db version or db doesnt exist, create the Workouts table
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //Create an sql command which creates the table
         String sCreate = "CREATE TABLE " +
                 TABLE_NAME + "(" +
                 ID + " integer primary key autoincrement, " +
@@ -43,14 +56,20 @@ public class WorkoutDPHelper extends SQLiteOpenHelper {
                 DESCRIP + " text, " +
                 LOCATION + " text, " +
                 PICTURE + " text);";
-        db.execSQL(sCreate);
+        db.execSQL(sCreate); //execute the command to create the table
 
     }
 
+    /**
+     * This method will be called when a database version has been upgraded
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);//delete the table
+        onCreate(db); //call onCreate()
     }
 
     /**
@@ -95,22 +114,25 @@ public class WorkoutDPHelper extends SQLiteOpenHelper {
         // execute insert, which returns the auto increment value
         long autoid = sqlDB.insert(TABLE_NAME, null, cvs);
 
-        // update the id of the purcahse with the new auto id
+        // update the id of the WorkoutSession with the new auto id
         session.id = autoid;
         return autoid;
     }
 
 
+    /**
+     * This method will grab all wokrouts from the Workouts table and return them within a Cursor
+     * @return
+     */
     public Cursor getAllWorkouts()
     {
-        // you may want to return a List of FuelPurchase items instead
         // list of columns to select and return
         String[] sFields = new String [] {ID, NAME,DATE, DESCRIP, PICTURE, LOCATION};
         return sqlDB.query(TABLE_NAME, sFields, null, null, null, null, null);
     }
 
     /**
-     * This method takes in a course and deletes the course from the table
+     * This method takes in a Workout and deletes the Workouts from the table
      * @param
      * @return
      */
@@ -122,15 +144,6 @@ public class WorkoutDPHelper extends SQLiteOpenHelper {
 
 
 
-    public static byte[] getBytes(Bitmap bitmap) {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
-       return bos.toByteArray();
-    }
 
-    // convert from byte array to bitmap
-    public Bitmap getImage(byte[] image) {
-        return BitmapFactory.decodeByteArray(image, 0, image.length);
-    }
 
 }
