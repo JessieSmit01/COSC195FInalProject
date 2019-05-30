@@ -1,9 +1,14 @@
 package com.example.exercisetracker;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +47,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 4);
         }
+
+        createNotificationChannel();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "del")
+                .setSmallIcon(R.drawable.dumbell)
+                .setContentTitle("Did you workout today?")
+                .setContentText("Don't forget to add a new workout session!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+
+        notificationManager.notify(1, builder.build());
     }
 
     @Override
@@ -56,6 +73,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i = new Intent(this, ViewWorkouts.class);
                 startActivity(i);
                 break;
+        }
+    }
+
+
+    private void createNotificationChannel() {
+        //check if this phone is running build version code O. This version and above requires a
+        //notification channel for notifications
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "delete";
+            String description = "deleted";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("del", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 }
