@@ -120,7 +120,6 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
                 return;
             case R.id.btnSaveWorkout:
                 this.address = getAddress(this, latitude, longitude);
-                Toast.makeText(this, address, Toast.LENGTH_LONG).show();
                 saveToDB();
 
                 return;
@@ -257,7 +256,13 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
 
     public void saveToDB()
     {
+
         WorkoutSession session = new WorkoutSession(this.name.getText().toString(), this.stringDate, this.description.getText().toString(), this.currentPhotoPath, getAddress(this, latitude, longitude));
+        if(session.name.equals("") || session.description.equals(""))
+        {
+            Toast.makeText(this, "Name and Description cannot be left blank", Toast.LENGTH_SHORT).show();
+            return;
+        }
         db.open();
         db.createWorkoutSession(session);
 
