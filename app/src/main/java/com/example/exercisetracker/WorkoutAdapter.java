@@ -17,15 +17,18 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.io.FilePermission;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutAdapter extends ArrayAdapter<WorkoutSession> {
 
     TextView tvDesc, tvName, tvLocation, tvDate;
     ImageView picture;
+    List<WorkoutSession> obSessions;
 
     public WorkoutAdapter(Context context, List<WorkoutSession> objects) {
         super(context, R.layout.workout_view_layout, objects);
+        this.obSessions = objects;
 
     }
 
@@ -62,5 +65,6 @@ public class WorkoutAdapter extends ArrayAdapter<WorkoutSession> {
         }
         return locationItemView;
     }
+
 
 }

@@ -109,6 +109,17 @@ public class WorkoutDPHelper extends SQLiteOpenHelper {
         return sqlDB.query(TABLE_NAME, sFields, null, null, null, null, null);
     }
 
+    /**
+     * This method takes in a course and deletes the course from the table
+     * @param
+     * @return
+     */
+    public boolean deleteCourse(WorkoutSession session)
+    {
+        return sqlDB.delete(TABLE_NAME, ID + " = " +  "'" + session.id + "'", null) > 0;
+
+    }
+
 
 
     public static byte[] getBytes(Bitmap bitmap) {
