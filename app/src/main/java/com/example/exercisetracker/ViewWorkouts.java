@@ -1,7 +1,12 @@
 package com.example.exercisetracker;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.database.Cursor;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +34,7 @@ public class ViewWorkouts extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_workouts);
         sessionList = new ArrayList<>();
-
+        createNotificationChannel();
         getWorkouts();
         if(this.sessionList.size() > 0)
         {
@@ -99,8 +104,36 @@ public class ViewWorkouts extends AppCompatActivity implements AdapterView.OnIte
                 sessionList.remove(obSession);
                 Toast.makeText(this, "Workout Deleted", Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "del")
+                        .setSmallIcon(R.drawable.dumbell)
+                        .setContentTitle("Workout successfully deleted")
+                        .setContentText("You have successfully deleted your workout")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+
+                notificationManager.notify(1, builder.build());
             }
         }
+
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "delete";
+            String description = "deleted";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("del", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
 
 
