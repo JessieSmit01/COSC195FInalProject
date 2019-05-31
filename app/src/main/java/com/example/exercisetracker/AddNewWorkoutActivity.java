@@ -122,10 +122,12 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
         {
             case R.id.btnAddPicture:
 
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) //Check for permission denied
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) //Check for permission denied for camera, read and write from storage.
+                        == PackageManager.PERMISSION_DENIED || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) //check if write storage permissions are granted, if not, ask the user to grant permission
+                        == PackageManager.PERMISSION_DENIED || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) //check if read storage permissions are granted, if not, ask the user to grant permission
                         == PackageManager.PERMISSION_DENIED)
                 {
-                    Toast.makeText(this, "Camera access must be enabled in System Settings", Toast.LENGTH_LONG).show(); //inform the user by toast to enable camera permission
+                    Toast.makeText(this, "Camera, and Storage access must be enabled in System Settings to use this functionality", Toast.LENGTH_LONG).show(); //inform the user by toast to enable camera permission
                     return;
                 }
                 capturePhoto();
