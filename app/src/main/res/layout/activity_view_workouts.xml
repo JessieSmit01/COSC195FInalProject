@@ -9,38 +9,23 @@
 
     <ListView
         android:id="@+id/lstWorkouts"
-        android:layout_width="375dp"
-        android:layout_height="550dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:clickable="false"
-        android:contextClickable="false"
-        android:descendantFocusability="blocksDescendants"
-        android:longClickable="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent">
-
-    </ListView>
-
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="385dp"
-        android:layout_height="81dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="#F75959"
-        android:fontFamily="@font/press_start_2p"
-        android:text="Delete Workout"
-        android:textSize="20sp"
+        android:clickable="false"
+        android:contextClickable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:longClickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lstWorkouts"
-        app:layout_constraintVertical_bias="0.071" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
+
 </android.support.constraint.ConstraintLayout>

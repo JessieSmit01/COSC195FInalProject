@@ -130,12 +130,25 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
                     Toast.makeText(this, "Camera, and Storage access must be enabled in System Settings to use this functionality", Toast.LENGTH_LONG).show(); //inform the user by toast to enable camera permission
                     return;
                 }
+
+                if(this.currentPhotoPath != null)
+                {
+                    File obFile = new File(this.currentPhotoPath);
+
+                        obFile.delete();
+
+
+                }
+
                 capturePhoto();
 
                 return;
             case R.id.btnSaveWorkout:
                 this.address = getAddress(this, latitude, longitude); //get the address of the user
+
                 saveToDB();
+
+                this.currentPhotoPath = null;
 
                 return;
         }
@@ -146,6 +159,7 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
      * This method is responsible for creating a file to save a picture within, it then creates a new camera intent to access the camera
      */
     private void capturePhoto() {
+
         String file = "shared/"+DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString()+".jpg"; //set the new image file path as a string
 
 

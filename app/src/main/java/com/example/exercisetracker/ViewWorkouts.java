@@ -1,7 +1,10 @@
 package com.example.exercisetracker;
 
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +17,7 @@ import java.util.ArrayList;
 /**
  * This class will handle the back-end processing for the viewWorkouts layout
  */
-public class ViewWorkouts extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class ViewWorkouts extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ListView lv; //the listview within the layout
     ArrayList<WorkoutSession> sessionList; //arraylist to hold workoutSession
@@ -40,7 +43,32 @@ public class ViewWorkouts extends AppCompatActivity implements AdapterView.OnIte
             lv.setOnItemClickListener(this); //
         }
 
-        findViewById(R.id.btnDelete).setOnClickListener(this);
+        else
+        {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setTitle("You have not saved any workouts");
+            builder.setMessage("Please save a new workout so that you can view it here.");
+            builder.setNeutralButton("Okay",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            goToHomeScreen();
+
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+
+
+    }
+
+    public void goToHomeScreen()
+    {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     /**
@@ -75,39 +103,72 @@ public class ViewWorkouts extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        this.obSession = sessionList.get(position); //get the session from the listview position in the array
-        Toast.makeText(this, "Workout Selected", Toast.LENGTH_SHORT).show(); //inform the user that the workout has been clicked
+       this.obSession = sessionList.get(position); //get the session from the listview position in the array
+       // Toast.makeText(this, "Workout Selected", Toast.LENGTH_SHORT).show(); //inform the user that the workout has been clicked
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Workout Selected");
+        builder.setMessage("Would you like to delete this workout?");
+        builder.setPositiveButton("Delete",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        confirmDelete();
+                    }
+                });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
     }
 
 
-    /**
-     * Handle button click
-     * @param v
-     */
-    @Override
-        public void onClick(View v) {
+        public void confirmDelete()
+        {
 
-            if (v.getId() == R.id.btnDelete) {
-
-                if(this.obSession == null) //no session has been clicked
-                {
-                    Toast.makeText(this, "No Workout Selected", Toast.LENGTH_SHORT).show(); //inform user that no workout has been selected
-                    return;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setTitle("Are you sure you want to delete this workout?");
+            builder.setMessage("All workout data and picture will be permanently deleted");
+            builder.setPositiveButton("Delete",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            deleteWorkout();
+                        }
+                    });
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
                 }
-                db.deleteCourse(obSession); //delete the course from database
+            });
 
-                if (obSession.picture != null) { //delete the picture from the phone's internal storage
-                    File file = new File(obSession.picture);
-                    boolean deleted = file.delete(); //delete the file
-                }
+            AlertDialog dialog = builder.create();
+            dialog.show();
 
-                sessionList.remove(obSession); //remove the selected item from the ArrayList of workout sessions
-                Toast.makeText(this, "Workout Deleted", Toast.LENGTH_SHORT).show(); //inform the user that the workout has been deleted
-                adapter.notifyDataSetChanged(); //refresh the listview
-                obSession = null; //reset obSession back to null
+        }
 
+
+        public void deleteWorkout()
+        {
+            db.deleteCourse(obSession); //delete the course from database
+
+            if (obSession.picture != null) { //delete the picture from the phone's internal storage
+                File file = new File(obSession.picture);
+                boolean deleted = file.delete(); //delete the file
             }
+
+            sessionList.remove(obSession); //remove the selected item from the ArrayList of workout sessions
+            Toast.makeText(this, "Workout Deleted", Toast.LENGTH_SHORT).show(); //inform the user that the workout has been deleted
+            adapter.notifyDataSetChanged(); //refresh the listview
+            obSession = null; //reset obSession back to null
         }
 
 
