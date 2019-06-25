@@ -1,4 +1,4 @@
-package com.example.exercisetracker;
+package com.jessie.exercisetracker;
 
 import android.Manifest;
 import android.app.NotificationChannel;
@@ -6,14 +6,15 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+
 
 /**
  * This class will be used to control the back-and processing of the main activity layout
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        //MobileAds.initialize(this, "YOUR_ADMOB_APP_ID");
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) //check if camera permissions are granted, if not, ask the user to grant permission
                 == PackageManager.PERMISSION_DENIED)
         {

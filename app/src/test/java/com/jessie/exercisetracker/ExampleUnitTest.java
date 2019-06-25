@@ -1,4 +1,4 @@
-package com.example.exercisetracker;
+package com.jessie.exercisetracker;
 
 import org.junit.Test;
 

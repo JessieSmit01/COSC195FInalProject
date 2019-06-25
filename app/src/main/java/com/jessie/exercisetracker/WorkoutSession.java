@@ -1,6 +1,4 @@
-package com.example.exercisetracker;
-
-import android.graphics.Bitmap;
+package com.jessie.exercisetracker;
 
 /**
  * This will be a simple class to hold database informaiton for a single workout session.

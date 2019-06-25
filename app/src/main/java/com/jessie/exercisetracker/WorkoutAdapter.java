@@ -1,6 +1,5 @@
-package com.example.exercisetracker;
+package com.jessie.exercisetracker;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
