@@ -14,6 +14,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.provider.MediaStore;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -96,9 +97,10 @@ public class AddNewWorkoutActivity extends AppCompatActivity implements View.OnC
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) //check if permission is granted for location services
                 == PackageManager.PERMISSION_GRANTED)
         {
+            locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, this, Looper.getMainLooper());
 
-            locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER, 5000, 5, this); //request location updates as per these settings
+            //locationManager.requestLocationUpdates(
+                   // LocationManager.GPS_PROVIDER, 5000, 5, this); //request location updates as per these settings
         }
 
         db = new WorkoutDPHelper(this); //instantiate db as a new WorkoutDBHelper
